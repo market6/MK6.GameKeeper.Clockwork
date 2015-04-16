@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+
+    <!-- Each job needs to appear in a separate job node-->
+    <job>
+      <!-- Name for the job, used as part of the identifier for the job later in the trigger -->
+      <name>Job Name</name>
+      <!-- Job group, used as part of the identifier for the job later in the trigger-->
+      <group>Job Group</group>
+      <!-- Friendly description for the job -->
+      <description>Description of what the job does</description>
+      <!-- Fully-qualified job type name -->
+      <job-type>Quartz.Job.NoOpJob, Quartz</job-type>
+      <!-- 
+        Whether or not the job should remain stored after it is orphaned (no triggerss point to it). 
+        This can usually be false since our schedule is defined in XML. 
+      -->
+      <durable>true</durable>
+      <!-- 
+        Set whether or not the the scheduler should re-Execute the job if a 'recovery' or 'fail-over' situation is encountered.
+      -->
+      <recover>false</recover>
+      <!-- Data which should be made available to the job -->
+      <job-data-map>
+        <entry>
+          <key>key1</key>
+          <value>value1</value>
+        </entry>
+        <entry>
+          <key>key2</key>
+          <value>value2</value>
+        </entry>
+      </job-data-map>
+    </job>
+
+    <!-- Each trigger needs to appear in a separate trigger node -->
+    <trigger>
+      <!-- A simple trigger will repeat at some interval for a certain period of time or number of repitions -->
+      <simple>
+        <!-- Identifying name for the trigger -->
+        <name>Trigger name</name>
+        <!-- Group to which the trigger belongs -->
+        <group>Trigger group</group>
+        <description>Desription for this trigger</description>
+        <job-name>Job Name</job-name>
+        <job-group>Job Group</job-group>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        <!-- Number of times to repeat the job; -1 will repeat indefinitely -->
+        <repeat-count>-1</repeat-count>
+        <!-- 
+          You can also specify a time to start (in actual time or number of seconds from now to 
+          start the trigger) and stop the trigger 
+        -->
+        <!--<start-time>2015-04-16 9:00AM</start-time>
+        <start-time-seconds-in-future>60</start-time-seconds-in-future>
+        <end-time>2015-04-30 12:59PM</end-time>-->
+        <!-- Milliseconds between triggers -->
+        <repeat-interval>5000</repeat-interval>
+      </simple>
+    </trigger>
+    <!--<trigger>
+      <cron>
+        <name>Trigger name</name>
+        <group>Trigger group</group>
+        <description>Desription for this trigger</description>
+        <job-name>Job Name</job-name>
+        <job-group>Job Group</job-group>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        --><!-- 
+          Cron expression describing when the job should be triggered 
+          For examples, see http://quartznet.sourceforge.net/apidoc/2.0/html/html/8543b17a-e2d4-bfb3-b8d2-ffcdc8a342c7.htm.
+          More information is also here http://quartznet.sourceforge.net/apidoc/2.0/html/html/593ccdeb-6ed9-a443-60b7-c80bbaeb8286.htm
+          and here https://en.wikipedia.org/wiki/Cron#CRON_expression.
+          The expression here will run the job at 1am every day
+        --><!--
+        <cron-expression>0 0 1 * * ?</cron-expression>
+      </cron>
+    </trigger>-->
+
+  </schedule>
+
+</job-scheduling-data>
