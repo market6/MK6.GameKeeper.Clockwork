@@ -1,23 +1,24 @@
 <?xml version="1.0"?>
 <package >
-    <metadata>
-        <id>MK6.GameKeeper.Clockwork</id>
-        <version>$version$</version>
-        <authors>Market6</authors>
-        <owners>Market6</owners>
-        <requireLicenseAcceptance>true</requireLicenseAcceptance>
-        <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-        <description>Plugin for MK6.GameKeeper to run scheduled tasks</description>
-        <copyright>Copyright 2015</copyright>
-        <dependencies>
-            <dependency id="Common.Logging" version="2.1.2" />
-            <dependency id="Quartz" version="2.2.3" />
-            <dependency id="Serilog" version="1.5.1" />
-            <dependency id="Topshelf" version="3.1.4" />
-        </dependencies>
-    </metadata>
-    <files>
-        <file src="bin\Release\MK6.GameKeeper.Clockwork.*" target="lib\net451" />
-        <file src="bin\Release\quartz_jobs.xml" target="" />
-    </files>
+  <metadata>
+    <id>MK6.GameKeeper.Clockwork</id>
+    <version>$version$</version>
+    <authors>Market6</authors>
+    <owners>Market6</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <description>Plugin for MK6.GameKeeper to run scheduled tasks</description>
+    <copyright>Copyright 2015</copyright>
+    <dependencies>
+      <dependency id="Common.Logging" version="2.1.2" />
+      <dependency id="Quartz" version="2.2.3" />
+      <dependency id="Serilog" version="1.5.1" />
+      <dependency id="Topshelf" version="3.1.4" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\MK6.GameKeeper.Clockwork.exe" target="lib\net451" />
+    <file src="bin\Release\MK6.GameKeeper.Clockwork.exe.config" target="content" />
+    <file src="bin\Release\quartz_jobs.xml" target="content" />
+  </files>
 </package>
