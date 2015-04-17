@@ -20,5 +20,6 @@
     <file src="bin\Release\MK6.GameKeeper.Clockwork.exe" target="lib\net451" />
     <file src="bin\Release\MK6.GameKeeper.Clockwork.exe.config" target="content" />
     <file src="bin\Release\quartz_jobs.xml" target="content" />
+    <file src="Install.ps1" target="tools" />
   </files>
 </package>
