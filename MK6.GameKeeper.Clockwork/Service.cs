@@ -2,22 +2,21 @@
 using Quartz.Impl;
 using Serilog;
 using System;
-using System.Collections.Specialized;
-using Topshelf;
+using System.Configuration;
 
 namespace MK6.GameKeeper.Clockwork
 {
-    public class Scheduler : ServiceControl
+    class Service
     {
         private readonly IScheduler scheduler;
 
-        public Scheduler(NameValueCollection properties)
+        public Service()
         {
-            var schedulerFactory = new StdSchedulerFactory(properties);
+            var schedulerFactory = new StdSchedulerFactory(ConfigurationManager.AppSettings);
             this.scheduler = schedulerFactory.GetScheduler();
         }
 
-        public bool Start(HostControl hostControl)
+        public bool Start()
         {
             try
             {
@@ -34,7 +33,7 @@ namespace MK6.GameKeeper.Clockwork
             return true;
         }
 
-        public bool Stop(HostControl hostControl)
+        public bool Stop()
         {
             try
             {
