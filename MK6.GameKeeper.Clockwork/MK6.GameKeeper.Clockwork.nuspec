@@ -15,6 +15,7 @@
     <dependencies>
       <dependency id="Quartz" version="2.2.3" />
       <dependency id="Serilog" version="1.5.1" />
+      <dependency id="MK6.GameKeeper.AddIns" version="1.0.10" />
     </dependencies>
     
   </metadata>
