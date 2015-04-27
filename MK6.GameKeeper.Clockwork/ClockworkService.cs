@@ -1,22 +1,32 @@
-﻿using Quartz;
+﻿using MK6.GameKeeper.AddIns;
+using Quartz;
 using Quartz.Impl;
 using Serilog;
 using System;
 using System.Configuration;
+using System.Reflection;
 
 namespace MK6.GameKeeper.Clockwork
 {
-    class Service
+    // [AddIn("MK6.GameKeeper.Clockwork", Version="1.0")]
+    public abstract class ClockworkService : GameKeeperAddIn
     {
         private readonly IScheduler scheduler;
 
-        public Service()
+        public ClockworkService()
         {
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.AppSettings()
+                .CreateLogger();
+
+            var executingAssembly = ConfigurationManager.OpenExeConfiguration(
+                Assembly.GetExecutingAssembly().Location);
+
             var schedulerFactory = new StdSchedulerFactory(ConfigurationManager.AppSettings);
             this.scheduler = schedulerFactory.GetScheduler();
         }
 
-        public bool Start()
+        public virtual void Start()
         {
             try
             {
@@ -27,13 +37,10 @@ namespace MK6.GameKeeper.Clockwork
             catch (Exception ex)
             {
                 Log.Error(ex, "Error occurred while starting scheduler");
-                return false;
             }
-
-            return true;
         }
 
-        public bool Stop()
+        public virtual void Stop()
         {
             try
             {
@@ -44,10 +51,17 @@ namespace MK6.GameKeeper.Clockwork
             catch (Exception ex)
             {
                 Log.Error(ex, "Error occurred while shutting down scheduler");
-                return false;
             }
+        }
 
-            return true;
+        public virtual AddInStatus Status
+        {
+            get
+            {
+                return scheduler.IsStarted
+                    ? AddInStatus.Running
+                    : AddInStatus.Stopped;
+            }
         }
     }
 }

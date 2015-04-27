@@ -1,6 +1,6 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
-$contentFiles = "MK6.GameKeeper.Clockwork.exe.config", "quartz_jobs.xml"
+$contentFiles = "quartz_jobs.xml"
 
 Foreach ($contentFile in $contentFiles)
 {
